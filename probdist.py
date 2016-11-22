@@ -124,25 +124,33 @@ if __name__ == '__main__':
     y = []
     lp1 = []
     lp2 = []
-    for i in range(1, 500):
+    for i in range(10, 500):
         x.append(i)
-        a, b, c = dist.dist(i)
-        y.append(a)
-        lp1.append(b)
-        lp2.append(c)
+        a = 0
+        b = 0
+        c = 0
+        times = 30
+        for j in range(times):
+            ap, bp, cp = dist.dist(i)
+            a += ap
+            b += bp
+            c += cp
+        y.append(a / times)
+        lp1.append(b / times)
+        lp2.append(c / times)
 
     # plt.ion()
     if (len(sys.argv) > 1 and sys.argv[1] == 'plot'):
         plt.plot(x, y)
-        plt.title('Distance vs # observationts')
-        plt.xlabel('number of observations, T')
-        plt.ylabel('distance')
+        plt.title('Distance vs # observationts', fontsize=14)
+        plt.xlabel('number of observations, T', fontsize=14)
+        plt.ylabel('distance', fontsize=14)
         plt.show()
 
         plt.plot(x, lp1, label = 'mu(Ot | lamda 0)')
         plt.plot(x, lp2, label = 'mu(Ot | lamba)')
-        plt.xlabel('number of observations, T')
-        plt.ylabel('log probability')
+        plt.xlabel('number of observations, T', fontsize=14)
+        plt.ylabel('log probability', fontsize=14)
         plt.legend()
         plt.show()
 
